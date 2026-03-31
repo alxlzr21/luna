@@ -52,15 +52,14 @@ const LUNA_CONFIG = {
           id:'am-routine', name:'AM routine', meta:'', active:true,
           children: [
             { id:'sc-cleanse-am', name:'Cleanse',          meta:'AM', active:true },
-            { id:'sc-argireline', name:'Argireline',       meta:'AM', active:true },
-            { id:'sc-spf',        name:'SPF',              meta:'AM', active:true },
-            { id:'sc-barrier-am', name:'Moisturiser',      meta:'AM', active:true },
-          ]
+            { id:'sc-spf',        name:'SPF',              meta:'AM', active:true },          ]
         },
         {
           id:'pm-routine', name:'PM routine', meta:'', active:true,
           children: [
-            { id:'sc-cleanse1', name:'First cleanse',      meta:'PM', active:true },
+            { id:'sc-cleanse1', name:'First cleanse - Ultrabland',      meta:'PM', active:true },
+            { id:'sc-cleanse1', name:'First cleanse - Iunik Oil Cleanser',      meta:'PM', active:true },
+
             { id:'sc-cleanse2', name:'Second cleanse',     meta:'PM', active:true },
             { id:'sc-retinol',  name:'Retinol',            meta:'PM', active:true },
             { id:'sc-retinal',  name:'Retinal eye serum',  meta:'PM', active:true },

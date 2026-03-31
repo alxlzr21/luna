@@ -140,7 +140,7 @@ const LUNA_CONFIG = {
      After you set up the Apps Script (see SETUP.md),
      paste your Web App URL here.
   */
-  sheetsWebAppUrl: '',   /* paste your Apps Script URL here */
+  sheetsWebAppUrl: 'https://script.google.com/macros/s/AKfycbxEi7yu22mP3eEsPVplzL2ax8fony5Uz9siJZmhHQzMu3v9tUo77lflDhhkerhIC2w__g/exec',   /* paste your Apps Script URL here */
 
   /* ---- AI
      The Claude API key is handled by the platform — leave this as-is.

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#FAF9F7" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Luna" />
+  <title>Luna</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- SPLASH / SETUP -->
+    <div id="screen-setup" class="screen active">
+      <div class="setup-wrap">
+        <div class="logo-mark">◎</div>
+        <h1 class="app-title">Luna</h1>
+        <p class="app-subtitle">Your personal health OS</p>
+        <div class="setup-card">
+          <label class="field-label">When did your last period start?</label>
+          <input type="date" id="setup-period-date" class="field-input" />
+          <button class="btn-primary" onclick="App.completeSetup()">Get started</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div id="screen-main" class="screen">
+
+      <!-- PHASE BANNER -->
+      <div id="phase-banner" class="phase-banner">
+        <div class="phase-left">
+          <div class="phase-label" id="phase-label">—</div>
+          <div class="phase-day" id="phase-day-text">—</div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-note" id="phase-note-text">—</div>
+        </div>
+      </div>
+
+      <!-- NAV TABS -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="log">Log</button>
+        <button class="tab-btn" data-tab="habits">Habits</button>
+        <button class="tab-btn" data-tab="food">Food</button>
+        <button class="tab-btn" data-tab="today">Today</button>
+        <button class="tab-btn" data-tab="insights">Insights</button>
+      </nav>
+
+      <!-- TAB: LOG -->
+      <div id="tab-log" class="tab-panel active">
+        <div class="log-modes">
+          <button class="mode-btn active" onclick="App.setLogMode('free')">Free log</button>
+          <button class="mode-btn" onclick="App.setLogMode('quick')">Quick ticks</button>
+        </div>
+
+        <!-- Free log mode -->
+        <div id="log-free" class="log-mode-panel active">
+          <p class="hint">Type anything. No format needed.</p>
+          <textarea id="free-log-input" class="log-textarea"
+            placeholder="e.g. 'woke up puffy and anxious, leftover pasta day 3' or 'took elvanse 8am 50mg, feel like crying for no reason'"></textarea>
+          <button class="btn-primary" onclick="App.submitFreeLog()">Log it</button>
+          <div id="log-feedback" class="log-feedback hidden"></div>
+        </div>
+
+        <!-- Quick tick mode -->
+        <div id="log-quick" class="log-mode-panel hidden">
+          <p class="hint">Tap to tick. No typing needed.</p>
+          <div id="quick-tick-grid" class="tick-grid"></div>
+        </div>
+
+        <!-- Ovulation log -->
+        <div class="ovulation-section">
+          <div class="section-label">Confirm ovulation</div>
+          <p class="hint">When Ultrahuman confirms your temp shift, log it here. All phase dates will update.</p>
+          <div class="ov-row">
+            <input type="date" id="ov-date-input" class="field-input small" />
+            <button class="btn-secondary" onclick="App.confirmOvulation()">Confirm</button>
+          </div>
+          <div id="ov-status" class="ov-status hidden"></div>
+        </div>
+      </div>
+
+      <!-- TAB: HABITS -->
+      <div id="tab-habits" class="tab-panel hidden">
+        <div class="section-label">Supplements</div>
+        <div id="supps-list" class="tick-list"></div>
+        <div class="section-label" style="margin-top:1.5rem;">Daily habits</div>
+        <div id="habits-list" class="tick-list"></div>
+        <div class="section-label" style="margin-top:1.5rem;">Skincare</div>
+        <div id="skincare-list" class="tick-list"></div>
+      </div>
+
+      <!-- TAB: FOOD -->
+      <div id="tab-food" class="tab-panel hidden">
+        <div class="section-label">Log a meal or batch</div>
+        <div class="food-form">
+          <input type="text" id="food-name" class="field-input" placeholder="What did you eat?" />
+          <label class="field-label small">Prepared on</label>
+          <input type="date" id="food-prep-date" class="field-input" />
+          <label class="field-label small">Eaten at</label>
+          <input type="time" id="food-time" class="field-input" />
+          <label class="field-label small">Notes (optional)</label>
+          <input type="text" id="food-notes" class="field-input" placeholder="e.g. had with hot sauce, felt bloated after" />
+          <button class="btn-primary" onclick="App.logFood()">Log meal</button>
+        </div>
+        <div class="section-label" style="margin-top:1.5rem;">Recent batches</div>
+        <div id="batch-list" class="batch-list"></div>
+      </div>
+
+      <!-- TAB: TODAY -->
+      <div id="tab-today" class="tab-panel hidden">
+        <div class="section-label">Today's entries</div>
+        <div id="today-entries" class="entries-list">
+          <p class="empty-state">Nothing logged yet today.</p>
+        </div>
+      </div>
+
+      <!-- TAB: INSIGHTS -->
+      <div id="tab-insights" class="tab-panel hidden">
+        <div class="stats-grid" id="stats-grid"></div>
+        <div class="section-label" style="margin-top:1.5rem;">Your cycle profile</div>
+        <div id="cycle-insights" class="insights-list"></div>
+        <div class="section-label" style="margin-top:1.5rem;">What your data says</div>
+        <div id="pattern-insights" class="insights-list"></div>
+      </div>
+
+    </div>
+    <!-- /screen-main -->
+
+  </div>
+  <!-- /app -->
+
+  <script src="config.js"></script>
+  <script src="storage.js"></script>
+  <script src="cycle.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

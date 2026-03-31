@@ -1,0 +1,418 @@
+/* ============================================================
+   LUNA — THEME
+   This is the ONLY file that controls visual appearance.
+   Replace this file when redesigning in Figma.
+   ============================================================ */
+
+/* --- TOKENS --- */
+:root {
+  --bg:            #FAF9F7;
+  --bg-surface:    #FFFFFF;
+  --bg-raised:     #F4F2EE;
+  --border:        rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.15);
+
+  --text-primary:   #1A1A18;
+  --text-secondary: #6B6B66;
+  --text-hint:      #A8A89F;
+
+  --accent:        #1A1A18;
+  --accent-text:   #FFFFFF;
+
+  /* phase colours */
+  --phase-menstrual-bg:    #FCEBEB;
+  --phase-menstrual-text:  #791F1F;
+  --phase-follicular-bg:   #EAF3DE;
+  --phase-follicular-text: #27500A;
+  --phase-ovulation-bg:    #E1F5EE;
+  --phase-ovulation-text:  #085041;
+  --phase-luteal-early-bg:    #FAEEDA;
+  --phase-luteal-early-text:  #633806;
+  --phase-luteal-late-bg:  #FBEAF0;
+  --phase-luteal-late-text:#72243E;
+
+  /* tag colours */
+  --tag-mood-bg:       #EEEDFE;
+  --tag-mood-text:     #3C3489;
+  --tag-food-bg:       #EAF3DE;
+  --tag-food-text:     #27500A;
+  --tag-symptom-bg:    #FBEAF0;
+  --tag-symptom-text:  #72243E;
+  --tag-supplement-bg: #E1F5EE;
+  --tag-supplement-text:#085041;
+  --tag-other-bg:      #F1EFE8;
+  --tag-other-text:    #444441;
+
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* --- RESET --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100%;
+  padding-top: var(--safe-top);
+}
+
+/* --- GOOGLE FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display&display=swap');
+
+/* --- SCREENS --- */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: block; }
+
+/* --- SETUP SCREEN --- */
+.setup-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 100vh;
+  padding: 2rem 1.5rem; text-align: center;
+}
+.logo-mark {
+  font-size: 48px; line-height: 1; margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+.app-title {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 400;
+  color: var(--text-primary); margin-bottom: 0.25rem;
+}
+.app-subtitle {
+  font-size: 14px; color: var(--text-secondary); margin-bottom: 2rem;
+}
+.setup-card {
+  width: 100%; max-width: 360px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+/* --- PHASE BANNER --- */
+.phase-banner {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--bg-surface);
+  transition: background 0.3s;
+}
+.phase-banner.menstrual    { background: var(--phase-menstrual-bg); }
+.phase-banner.follicular   { background: var(--phase-follicular-bg); }
+.phase-banner.ovulation    { background: var(--phase-ovulation-bg); }
+.phase-banner.luteal-early { background: var(--phase-luteal-early-bg); }
+.phase-banner.luteal-late  { background: var(--phase-luteal-late-bg); }
+
+.phase-label {
+  font-size: 13px; font-weight: 500; color: var(--text-primary);
+}
+.phase-day {
+  font-size: 11px; color: var(--text-secondary); margin-top: 2px;
+}
+.phase-note {
+  font-size: 11px; color: var(--text-secondary);
+  text-align: right; max-width: 180px; line-height: 1.4;
+}
+
+/* --- TAB NAV --- */
+.tab-nav {
+  display: flex; overflow-x: auto; scrollbar-width: none;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--bg-surface);
+  padding: 0 4px;
+  position: sticky; top: 0; z-index: 10;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 12px 14px;
+  font-size: 13px; font-family: var(--font-body);
+  color: var(--text-secondary);
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; transition: color 0.15s;
+  margin-bottom: -0.5px;
+}
+.tab-btn.active { color: var(--text-primary); border-bottom-color: var(--text-primary); font-weight: 500; }
+
+/* --- TAB PANELS --- */
+.tab-panel { padding: 1.25rem 1rem 5rem; display: block; }
+.tab-panel.hidden { display: none; }
+
+/* --- FIELDS --- */
+.field-label {
+  font-size: 11px; font-weight: 500; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  display: block; margin-bottom: 6px;
+}
+.field-label.small { font-size: 11px; margin-top: 10px; }
+.field-input {
+  width: 100%; padding: 10px 12px;
+  font-size: 14px; font-family: var(--font-body);
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  outline: none;
+}
+.field-input.small { width: auto; min-width: 140px; }
+.field-input:focus { border-color: var(--text-secondary); }
+
+/* --- BUTTONS --- */
+.btn-primary {
+  width: 100%; padding: 12px;
+  font-size: 14px; font-weight: 500; font-family: var(--font-body);
+  background: var(--accent); color: var(--accent-text);
+  border: none; border-radius: var(--radius-md);
+  cursor: pointer; transition: opacity 0.15s;
+}
+.btn-primary:active { opacity: 0.8; }
+.btn-secondary {
+  padding: 10px 16px;
+  font-size: 13px; font-family: var(--font-body);
+  background: var(--bg-surface); color: var(--text-primary);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer; transition: background 0.15s;
+}
+.btn-secondary:hover { background: var(--bg-raised); }
+
+/* --- LOG MODES --- */
+.log-modes { display: flex; gap: 6px; margin-bottom: 1rem; }
+.mode-btn {
+  padding: 7px 14px; font-size: 13px; font-family: var(--font-body);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface); color: var(--text-secondary);
+  cursor: pointer;
+}
+.mode-btn.active { background: var(--text-primary); color: #fff; border-color: var(--text-primary); }
+
+.log-mode-panel { margin-bottom: 1.5rem; }
+.log-mode-panel.hidden { display: none; }
+
+.log-textarea {
+  width: 100%; min-height: 90px; padding: 12px;
+  font-size: 14px; font-family: var(--font-body);
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  resize: vertical; line-height: 1.6; outline: none;
+  margin-bottom: 10px;
+}
+.log-textarea::placeholder { color: var(--text-hint); font-size: 13px; }
+
+.log-feedback {
+  margin-top: 10px; padding: 12px 14px;
+  background: var(--bg-raised);
+  border-radius: var(--radius-md);
+  font-size: 13px; line-height: 1.6;
+  border: 0.5px solid var(--border);
+}
+.log-feedback.hidden { display: none; }
+
+/* --- TICK GRID (quick mode) --- */
+.tick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+/* --- TICK LIST (habits/supps) --- */
+.tick-list { display: flex; flex-direction: column; gap: 6px; }
+.tick-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer; transition: background 0.15s;
+  -webkit-user-select: none; user-select: none;
+}
+.tick-item.done { background: #EAF3DE; border-color: #97C459; }
+.tick-dot {
+  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.tick-item.done .tick-dot { background: #639922; border-color: #639922; }
+.tick-dot-inner {
+  width: 8px; height: 8px; border-radius: 50%; background: white;
+  opacity: 0; transition: opacity 0.15s;
+}
+.tick-item.done .tick-dot-inner { opacity: 1; }
+.tick-name { font-size: 13px; color: var(--text-primary); flex: 1; }
+.tick-meta { font-size: 11px; color: var(--text-secondary); }
+
+/* --- TICK CARD (quick mode) --- */
+.tick-card {
+  padding: 14px 12px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer; text-align: center;
+  transition: background 0.15s;
+  -webkit-user-select: none; user-select: none;
+}
+.tick-card.done { background: #EAF3DE; border-color: #97C459; }
+.tick-card-name { font-size: 13px; color: var(--text-primary); }
+
+/* --- SECTION LABEL --- */
+.section-label {
+  font-size: 11px; font-weight: 500; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+/* --- HINT --- */
+.hint { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+
+/* --- OVULATION SECTION --- */
+.ovulation-section {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 0.5px solid var(--border);
+}
+.ov-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.ov-status {
+  margin-top: 8px; font-size: 13px; color: #085041;
+  background: #E1F5EE; padding: 6px 12px;
+  border-radius: var(--radius-md);
+  border: 0.5px solid #5DCAA5;
+}
+.ov-status.hidden { display: none; }
+
+/* --- FOOD FORM --- */
+.food-form { display: flex; flex-direction: column; gap: 4px; margin-bottom: 1rem; }
+.food-form .btn-primary { margin-top: 10px; }
+
+/* --- BATCH LIST --- */
+.batch-list { display: flex; flex-direction: column; gap: 8px; }
+.batch-item {
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.batch-item-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+.batch-item-meta { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+.batch-freshness {
+  display: inline-block; margin-top: 6px;
+  font-size: 11px; font-weight: 500; padding: 3px 8px;
+  border-radius: 10px;
+}
+.batch-fresh  { background: #EAF3DE; color: #27500A; }
+.batch-ok     { background: #FAEEDA; color: #633806; }
+.batch-caution{ background: #FBEAF0; color: #72243E; }
+.batch-high   { background: #FCEBEB; color: #791F1F; }
+
+/* --- ENTRIES LIST --- */
+.entries-list { display: flex; flex-direction: column; gap: 8px; }
+.entry-card {
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.entry-meta {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  align-items: center; margin-bottom: 6px;
+}
+.entry-time { font-size: 11px; color: var(--text-secondary); }
+.entry-tag {
+  font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 10px;
+}
+.entry-tag.mood       { background: var(--tag-mood-bg);       color: var(--tag-mood-text); }
+.entry-tag.food       { background: var(--tag-food-bg);       color: var(--tag-food-text); }
+.entry-tag.symptom    { background: var(--tag-symptom-bg);    color: var(--tag-symptom-text); }
+.entry-tag.supplement { background: var(--tag-supplement-bg); color: var(--tag-supplement-text); }
+.entry-tag.other      { background: var(--tag-other-bg);      color: var(--tag-other-text); }
+.entry-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+.entry-flags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.entry-flag {
+  font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px;
+}
+.flag-histamine { background: #FBEAF0; color: #72243E; }
+.flag-pmdd      { background: #EEEDFE; color: #3C3489; }
+.flag-pcos      { background: #FAEEDA; color: #633806; }
+.flag-insulin   { background: #E1F5EE; color: #085041; }
+
+/* --- INSIGHTS --- */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: var(--bg-raised);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+.stat-val { font-size: 26px; font-weight: 500; color: var(--text-primary); }
+.stat-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+.insights-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+.insight-card {
+  padding: 12px 14px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.insight-title { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+.insight-body { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+/* --- EMPTY STATE --- */
+.empty-state { font-size: 13px; color: var(--text-hint); padding: 1rem 0; }
+
+/* --- LOADING DOTS --- */
+.loading::after {
+  content: '...';
+  animation: dots 1s steps(3, end) infinite;
+}
+@keyframes dots {
+  0%   { content: '.'; }
+  33%  { content: '..'; }
+  66%, 100% { content: '...'; }
+}
+
+/* --- CORRELATION NOTE --- */
+.correlation-note {
+  font-size: 12px; color: #633806; margin-top: 6px;
+  padding: 5px 10px;
+  background: #FAEEDA; border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   NFC CONTEXT SCREENS
+   These screens load when an NFC tag is tapped
+   ============================================================ */
+.nfc-screen {
+  min-height: 100vh; padding: 2rem 1rem;
+  display: flex; flex-direction: column;
+}
+.nfc-header {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 400;
+  color: var(--text-primary); margin-bottom: 0.5rem;
+}
+.nfc-sub {
+  font-size: 13px; color: var(--text-secondary); margin-bottom: 1.5rem;
+}
+.nfc-back {
+  margin-top: auto; padding-top: 2rem;
+  font-size: 13px; color: var(--text-secondary);
+  text-decoration: none;
+}

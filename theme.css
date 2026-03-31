@@ -416,3 +416,109 @@ body {
   font-size: 13px; color: var(--text-secondary);
   text-decoration: none;
 }
+
+/* ============================================================
+   ADDITIONS v2
+   Temperature, nested habits, edit mode, import, timestamps
+   ============================================================ */
+
+/* Time override row */
+.time-override-row {
+  margin: 8px 0 10px;
+}
+
+/* Habit groups */
+.habits-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+.habit-group {
+  margin-bottom: 1.25rem;
+}
+.habit-group-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.habit-group-name {
+  font-size: 11px; font-weight: 500; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.habit-subgroup {
+  margin: 8px 0 4px 12px;
+  border-left: 1.5px solid var(--border);
+  padding-left: 12px;
+}
+.habit-subgroup-label {
+  font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;
+}
+
+/* Edit mode */
+.edit-toggle-btn {
+  font-size: 12px; padding: 5px 12px;
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface); color: var(--text-secondary);
+  cursor: pointer;
+}
+.edit-toggle-btn.active {
+  background: var(--text-primary); color: #fff; border-color: var(--text-primary);
+}
+.edit-del-btn {
+  font-size: 16px; line-height: 1;
+  background: none; border: none;
+  color: var(--text-hint); cursor: pointer; padding: 0 4px;
+  flex-shrink: 0;
+}
+.edit-del-btn:hover { color: #A32D2D; }
+.edit-add-btn {
+  font-size: 12px; padding: 6px 10px;
+  border: 0.5px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background: none; color: var(--text-secondary);
+  cursor: pointer; margin-top: 6px;
+}
+.edit-add-btn.wide { width: 100%; text-align: center; }
+.edit-add-btn:hover { background: var(--bg-raised); }
+
+/* Temperature */
+.temp-form { display: flex; flex-direction: column; gap: 4px; }
+.temp-form .btn-primary { margin-top: 10px; }
+.temp-input-row { display: flex; gap: 8px; }
+.temp-val-input { flex: 1; }
+.temp-unit-select { width: 72px; }
+.temp-feedback {
+  font-size: 13px; color: var(--text-secondary); margin-top: 8px; min-height: 18px;
+}
+.temp-history { display: flex; flex-direction: column; gap: 6px; }
+.temp-row {
+  padding: 10px 12px;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.temp-val {
+  font-size: 18px; font-weight: 500; color: var(--text-primary);
+}
+.temp-meta {
+  font-size: 12px; color: var(--text-secondary); margin-top: 2px;
+}
+.temp-note-text {
+  font-size: 12px; color: var(--text-secondary); margin-top: 3px; font-style: italic;
+}
+.temp-source {
+  font-size: 11px; color: var(--text-hint); margin-top: 3px;
+}
+
+/* Data import */
+.import-btn {
+  display: inline-block; cursor: pointer;
+  padding: 10px 16px; font-size: 13px;
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface); color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.import-btn:hover { background: var(--bg-raised); }
+.import-status {
+  font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; min-height: 18px;
+}
